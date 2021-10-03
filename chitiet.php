@@ -39,7 +39,7 @@
             <h2>Chi tiết đơn hàng</h2>
             <form method="POST" class="d-flex" action="">
                 
-                <a href=index2.php>Trang chủ</a>
+                <a href=index.php>Trang chủ</a>
             </form>
         </div>
 
@@ -94,7 +94,7 @@ echo '</div>';
                 
         </div>
         <?php
-    echo " <a href='index2.php'>Quay lại cửa hàng</a> ";
+    echo " <a href='index.php'>Quay lại cửa hàng</a> ";
     ?>
 </body>
 </html>

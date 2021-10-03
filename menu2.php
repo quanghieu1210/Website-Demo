@@ -1,1 +1,1 @@
-<a href="index2.php">Trang chủ</a>
+<a href="index.php">Trang chủ</a>

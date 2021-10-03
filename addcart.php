@@ -10,6 +10,6 @@ else
 $qty=1;
 }
 $_SESSION['cart'][$id]=$qty;
-header("location:index2.php");
+header("location:index.php");
 exit();
 ?>

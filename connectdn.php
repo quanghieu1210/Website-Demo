@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect ('localhost', 'root', '', 'data') or die ('Không thể kết nối tới database');
+$conn = mysqli_connect ('localhost', 'root', '', 'hieuu2') or die ('Không thể kết nối tới database');
 mysqli_set_charset($conn, 'UTF8');
 
 if($conn === false){ 

@@ -3,7 +3,7 @@
 	$conn = mysqli_connect("localhost", "root", "", "hieuu2");
 	$sql = "DELETE FROM binhluan WHERE id=$id";
 	$ketqua = mysqli_query($conn, $sql);
-	header('location: index2.php');
+	header('location: index.php');
 ?>
 <!DOCTYPE html>
 <html>
