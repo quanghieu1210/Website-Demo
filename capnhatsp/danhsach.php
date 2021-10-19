@@ -5,7 +5,7 @@
             <h2>Cập nhật sản phẩm</h2>
             <form method="POST" class="d-flex" action="">
                 
-                <a href=index2.php>Trang chủ</a>
+                <a href=adminindex.php>Trang chủ</a>
             </form>
         </div>
 
@@ -37,12 +37,36 @@
                     <?php
                         $i = 1;
                         $connect=mysqli_connect("localhost", "root", "", "hieuu2")or die("Can not connect database");
+                        $result = mysqli_query($connect, 'select count(id) as total from product');
+                        $row = mysqli_fetch_assoc($result);
+                        $total_records = $row['total'];
+                 
+                        
+                        $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+                        $limit = 5;
+                 
+                       
+                        $total_page = ceil($total_records / $limit);
+                 
+                        
+                        if ($current_page > $total_page){
+                            $current_page = $total_page;
+                        }
+                        else if ($current_page < 1){
+                            $current_page = 1;
+                        }
+                 
+                       
+                        $start = ($current_page - 1) * $limit;
+                 
+                        
+                        $result = mysqli_query($connect, "SELECT * FROM product LIMIT $start, $limit");
+                        
 
-                              $sql="SELECT * from product order by id desc";
-                              $query=mysqli_query($connect,$sql);
-                              if(mysqli_num_rows($query) > 0)
+                             
+                              if(mysqli_num_rows($result) > 0)
                               {
-                              while($row=mysqli_fetch_array($query))
+                              while($row=mysqli_fetch_array($result))
                               {
                            echo' <tr>';
                             echo' <td>  '.$i++.' </th>';
@@ -69,6 +93,31 @@
                         
                 </tbody>
             </table>
+            </div>
+        <div class="pagination">
+           <?php 
+           
+            if ($current_page > 1 && $total_page > 1){
+                echo '<a href="capnhat.php?page='.($current_page-1).'">Trước</a> | ';
+            }
+ 
+            
+            for ($i = 1; $i <= $total_page; $i++){
+               
+                if ($i == $current_page){
+                    echo '<span>'.$i.'</span> | ';
+                }
+                else{
+                    echo '<a href="capnhat.php?page='.$i.'">'.$i.'</a> | ';
+                }
+            }
+ 
+            
+            if ($current_page < $total_page && $total_page > 1){
+                echo '<a href="capnhat.php?page='.($current_page+1).'">Tiếp</a> | ';
+            }
+           ?>
+        </div>
         </div>
 
         <div class="card-footer d-flex justify-content-between">
