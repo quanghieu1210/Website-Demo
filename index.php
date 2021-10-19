@@ -78,14 +78,14 @@
                         <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
                         <div class="navbar-collapse collapse">
                            <ul class="nav navbar-nav">
-                              <li class="active dropdown">
+                              <li >
                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Trang chủ</a>
                                  
                               </li>
                            
-                              <li><a href="capnhat.php">Cập nhật</a></li>
-                              <li class="dropdown">
-                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thống kê</a>
+                              
+                              <li>
+                                 <a href="thongke.php" ></a>
                                  
                               </li>
                               
@@ -112,7 +112,7 @@
                         <div class="flat-caption caption3 formLeft delay500 text-center">
                            <p> <br> .</p>
                         </div>
-                        <div class="flat-button caption4 formLeft delay600 text-center"><a class="more" href="#">Mua sách ngay</a></div>
+                      
                         <div class="flat-image formBottom delay200" data-duration="5" data-bottom="true"><img src="images/q1.jpg" alt=""></div>
                      </li>
                      <li>
@@ -122,7 +122,7 @@
                         <div class="flat-caption caption3 formLeft delay500">
                            <h2>???<br>  </h2>
                         </div>
-                        <div class="flat-button caption5 formLeft delay600"><a class="more" href="#">Mua sách ngay</a></div>
+                       
                         <div class="flat-image formBottom delay200" data-bottom="true"><img src="images/q4.jpg" alt=""></div>
                      </li>
                      <li>
@@ -132,7 +132,7 @@
                         <div class="flat-caption caption3 formLeft delay500 text-center">
                            <p>  </p>
                         </div>
-                        <div class="flat-button caption4 formLeft delay600 text-center"><a class="more" href="#">Mua sách ngay</a></div>
+                      
                         <div class="flat-image formBottom delay200" data-bottom="true"><img src="images/q3.jpg" alt=""></div>
                      </li>
                   </ul>
@@ -154,10 +154,50 @@
                </div>
             </div>
          </div>
+         
          <div class="clearfix"></div>
          <div class="container_fullwidth">
+         
             <div class="container">
                <div class="hot-products">
+               <form action="" method="GET">
+            Tìm kiếm: <input type="text" name="s">
+            
+            
+               <button class="button add-cart" type="submit" >Tìm</button>
+            
+        </form> </br>
+        <?php
+       
+            if(isset($_GET['s']))
+            {
+                $s = $_GET['s'];
+                $conn = mysqli_connect("localhost", "root", "", "hieuu2");
+                $sql = "SELECT * FROM product WHERE title LIKE '%$s%'";
+                $rs = mysqli_query($conn,$sql);
+                while($row = mysqli_fetch_array($rs))
+                {
+                    echo' <div class="col-md-3 col-sm-6">';
+                    echo' <div class="products">';
+                             
+echo'<div class="thumbnail"><img src="uploads/'.$row['img'].'" alt="Product Name" width="200"></a></div>';
+echo'  <div class="productname">'.$row['title'].'</div>';
+
+  echo' <h4 class="price">'.number_format($row['price'],3).' VND</h4>';
+    echo'<div class="button_group"><button class="button add-cart" type="button" ><a href="addcart.php?item='.$row['id'].'">Mua</a></button>
+    <button class="button add-cart" type="button" ><a href="chitiet.php?id='.$row['id'].'">Chi tiết</a></button>';
+             echo' </div>';
+             
+             
+             echo' </div>';
+             echo' </div>';
+              
+             
+         
+         }
+                }
+            
+        ?>
                   <h3 class="title"><strong>Sách</strong> hiện đang bán chạy</h3>
                 
                    
@@ -174,7 +214,7 @@
                               while($row=mysqli_fetch_array($query))
                               {
     
-                 
+                                 
                 
                        echo' <div class="col-md-3 col-sm-6">';
                        echo' <div class="products">';
