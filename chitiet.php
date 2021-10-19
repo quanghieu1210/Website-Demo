@@ -31,7 +31,7 @@
         include('xulydn.php');
     ?>
 <title>Chi tiết</title>
-<link rel="stylesheet" href="stylecart.css" />
+<link rel="stylesheet" href="css/stbl.css" />
 </head> 
 <body>
 <div class="card">
@@ -60,6 +60,7 @@ echo '<div>';
 echo '<img src="uploads/'.$row['img'].'" width="300"<br />';
 echo '<h3>'.$row['title'].'</h3> <br />';
 echo 'Tác giả: '.$row['author'].'  <br />';
+echo 'Số lượng hiện có: '.$row['quantity'].'  <br />';
 echo ' '.$row['note'].'  <br />';
 echo 'Giá: '.number_format($row['price'],3).'VND <br />';
 
@@ -68,31 +69,41 @@ echo '</div>';
 
 ?>
 </div>
-<button onclick="location.href='index2.php'" name="sbm" class="btn btn-success">Thêm vào giỏ hàng</button>
-</br>
+
+</br></br>
+
 <h3>Bình luận</h3>
 
         <div id="dsbinhluan">
                 <?php
-                
+               
                  $conn1 = mysqli_connect("localhost","root","","hieuu2");
-                 $sql1 = "SELECT * FROM binhluan";
+                 $sql1 = "SELECT * FROM binhluan  ";
                  $ketqua1 = mysqli_query($conn1,$sql1);
                 while($row1 = mysqli_fetch_array($ketqua1)) {
+                    echo '<div class="card-header d-flex justify-content-between align-items-center">';
                     echo '<p>'.$row1['username'].': '.$row1['noidung'];
                     echo ' <a href="xoacmt.php?id='.$row1['id'].'">Xóa</a>';
+                    echo '</div>';
                 }
                  ?>
         </div>
         <div id="binhluan">
-        <div class="form-group">
+        <div class="product">
                     
-                    <input type="text" id="username" class="form-control"placeholder="Tên của bạn">
-                    <input type="text" id="noidung" class="form-control"placeholder="Nội dung">
+        <form>       
+  <input type="text" name="name" class="question" id="username" required autocomplete="off" />
+  <label for="nme"><span>Tên</span></label>
+  <textarea name="message" rows="2" class="question" id="noidung" required autocomplete="off" placeholder="Nội dung"></textarea>
+  <label for="nme"><span></span></label>
+      
+      
+     </form> 
                 </div>
                 <button name="sbm" class="btn btn-success" id="btGui">Gửi</button>
                 
         </div>
+          
         <?php
     echo " <a href='index.php'>Quay lại cửa hàng</a> ";
     ?>
